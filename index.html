@@ -1,0 +1,998 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juanita & Nicolas</title>
+  <style>
+    @font-face {
+      font-family: 'Mixta Didone Regular';
+      src: url('fonts/mixta-didone-regular.otf') format('opentype');
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Avenir Custom Light';
+      src: url('fonts/avenir.ttc') format('truetype');
+      font-weight: 300;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Angella White Personal Use Only';
+      src: url('fonts/angella white personal use only.ttf') format('truetype');
+      font-display: swap;
+    }
+
+    :root {
+      --paper: #f1ebe2;
+      --ink: #8a503d;
+      --ink-soft: #9a9a93;
+      --line: #cab7a9;
+      --terracotta: #a96345;
+      --light: #f8e7dc;
+      --display-font: 'Mixta Didone Regular', 'Times New Roman', serif;
+      --sans-font: 'Avenir Custom Light', 'Avenir', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--display-font);
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    section { scroll-margin-top: 94px; }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border-bottom: none;
+      backdrop-filter: none;
+    }
+
+    .logo {
+      position: absolute;
+      left: 180px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: brightness(0) saturate(100%) invert(32%) sepia(17%) saturate(1088%) hue-rotate(334deg) brightness(95%) contrast(88%);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      font-size: 1.7rem;
+      line-height: 1;
+      padding: 6px 8px;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-size: clamp(0.9rem, 1vw, 1.1rem);
+      letter-spacing: 0.2px;
+      line-height: 1;
+      padding: 4px 10px;
+    }
+
+    nav a:not(:last-child) { border-right: 1px solid var(--line); }
+
+    .hero {
+      position: relative;
+    }
+
+    .hero img {
+      width: 100%;
+      height: min(92vh, 920px);
+      min-height: 620px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .home-box {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 26%;
+      transform: translateY(-50%);
+      text-align: center;
+      color: var(--ink);
+      padding: 0 16px;
+    }
+
+    .home-box h1 {
+      font-family: 'Mixta Didone Regular', 'Times New Roman', serif;
+      font-weight: 400;
+      font-size: clamp(2.2rem, 4vw, 5rem);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .home-box p {
+      font-family: 'Mixta Didone Regular', 'Times New Roman', serif;
+      font-weight: 400;
+      margin-top: 8px;
+      font-size: clamp(1.5rem, 3vw, 3.2rem);
+      letter-spacing: 6px;
+    }
+
+    .details {
+      background: var(--terracotta) url('img/landingdetalles/fondo terracota.png') center / cover no-repeat;
+      color: var(--light);
+      padding: 90px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3.2vw, 3.2rem);
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 36px;
+      letter-spacing: 1px;
+    }
+
+    .details-grid {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 34px 20px;
+    }
+
+    .detail-card {
+      text-align: center;
+      grid-column: span 2;
+    }
+
+    .detail-card:nth-child(4),
+    .detail-card:nth-child(5) {
+      grid-column: span 2;
+    }
+
+    .detail-card:nth-child(4) { grid-column: 2 / span 2; }
+    .detail-card:nth-child(5) { grid-column: 4 / span 2; }
+
+    .detail-icon {
+      width: 58px;
+      height: 68px;
+      margin: 0 auto 10px;
+      display: block;
+    }
+
+    .detail-label {
+      display: block;
+      font-size: clamp(1rem, 1.2vw, 1.5rem);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .detail-value {
+      display: block;
+      font-size: clamp(1.7rem, 1.5vw, 1.9rem);
+      text-transform: uppercase;
+    }
+
+    .dresscode {
+      padding: 82px 20px;
+      background: var(--paper);
+    }
+
+    .dress-title {
+      background: var(--terracotta) url('img/dresscode/bg dress code.png') center / cover no-repeat;
+      color: var(--light);
+      text-align: center;
+      padding: 24px 16px;
+      margin-bottom: 54px;
+      width: 100vw;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .dress-title h2 { margin: 0; }
+
+    .dress-content {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: 64px;
+    }
+
+    .dress-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .dress-row img {
+      width: 100%;
+      max-width: 560px;
+      justify-self: center;
+      display: block;
+    }
+
+    .dress-copy h3 {
+      font-size: clamp(2.4rem, 5vw, 5.2rem);
+      line-height: 0.95;
+      font-weight: 500;
+      margin-bottom: -15px;
+      color: #676a59;
+    }
+
+    .script {
+      display: block;
+      font-family: 'Angella White Personal Use Only', cursive;
+      font-size: clamp(2rem, 4vw, 4.2rem);
+      color: #98958f;
+      margin-bottom: 16px;
+    }
+
+    .dress-copy p {
+      font-size: clamp(1.2rem, 2vw, 2rem);
+      line-height: 1.2;
+      color: #64635c;
+    }
+
+    .dress-copy p strong {
+      color: var(--terracotta);
+      font-weight: 400;
+    }
+
+    .dress-tip {
+      width: min(700px, 100%);
+      min-height: 128px;
+      margin: 0 auto;
+      background: url('img/dresscode/tip.png') center / contain no-repeat;
+    }
+
+    .rsvp {
+      padding: 120px 20px;
+      min-height: 780px;
+      background: var(--paper) url('img/rvsp/fondo líneas.png') center / 600px auto repeat;
+      font-family: var(--display-font);
+    }
+
+    .rsvp-card {
+      width: min(800px, 100%);
+      margin: 0 auto;
+      background: var(--terracotta) url('img/rvsp/fondo terracota.png') center / cover no-repeat;
+      color: var(--light);
+      padding: clamp(30px, 4vw, 70px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      min-height: 500px;
+    }
+
+    #contacto .rsvp-card {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    #contacto .rsvp-card > div {
+      text-align: left;
+    }
+
+    #contacto .rsvp-card p {
+      text-align: left;
+    }
+
+    #contacto .rsvp-card h2 {
+      text-align: left;
+      font-size: clamp(3.6rem, 3.2vw, 3.8rem);
+    }
+
+    #contacto .planner-name,
+    #contacto .planner-phone {
+      font-family: var(--display-font);
+    }
+
+    #contacto .planner-phone {
+      margin-bottom: 25px;
+      font-size: clamp(2.4rem, 2.2vw, 2.4rem);
+      font-weight: 400;
+    }
+
+    .contacto-icon {
+      display: block;
+      width: 30px;
+      height: auto;
+      margin: 24px 0 10px;
+    }
+
+    .rsvp-card h2 {
+      margin: 0 0 18px;
+      color: var(--light);
+      text-align: left;
+      font-size: clamp(4.5rem, 4vw, 4.2rem);
+    }
+
+    .rsvp-card p {
+      font-family: var(--sans-font);
+      font-size: clamp(1.1rem, 1.7vw, 1.9rem);
+      line-height: 1.2;
+    }
+
+    .confirm-btn {
+      margin-top: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: #5f6351;
+      background: #ece9e7;
+      border-radius: 999px;
+      min-height: 56px;
+      min-width: 190px;
+      padding: 0 34px;
+      border: 1px solid rgba(95, 99, 81, 0.15);
+      font-size: 1.2rem;
+    }
+
+    .deadline {
+      align-self: end;
+      justify-self: end;
+      text-align: left;
+    }
+
+    .deadline img {
+      width: 18px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .deadline span {
+      display: block;
+      font-family: var(--sans-font);
+      margin-bottom: 8px;
+    }
+
+    .deadline strong {
+      display: block;
+      font-size: clamp(1.7rem, 2.8vw, 3.5rem);
+      line-height: 1;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .comollegar {
+      padding: 82px 20px;
+      text-align: center;
+      background: var(--paper);
+    }
+
+    .comollegar img {
+      width: min(900px, 100%);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .galeria {
+      padding-top: 82px;
+      background: var(--paper);
+    }
+
+    .gallery-hero {
+      position: relative;
+    }
+
+    .gallery-hero img {
+      width: 100%;
+      display: block;
+    }
+
+    .gallery-hero h2 {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #f7efe9;
+      font-family: 'Angella White Personal Use Only', cursive;
+      font-size: clamp(3rem, 7vw, 7rem);
+      text-transform: none;
+      margin: 0;
+    }
+
+    .invite {
+      background: var(--terracotta) url('img/galeria/fondo terracota.png') center / cover no-repeat;
+      color: var(--light);
+      text-align: center;
+      padding: 54px 16px;
+    }
+
+    .invite p {
+      font-family: var(--sans-font);
+      font-size: clamp(1rem, 1.5vw, 1.6rem);
+      max-width: 920px;
+      margin: 0 auto;
+      line-height: 1.2;
+      font-weight: 400;
+    }
+
+    .invite p + p { margin-top: 16px; }
+
+    .share-btn {
+      margin-top: 24px;
+      display: inline-flex;
+      text-decoration: none;
+      color: #666a5b;
+      background: #ece9e7;
+      border-radius: 999px;
+      min-height: 56px;
+      min-width: 200px;
+      padding: 0 30px;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+    }
+
+    .end-mark {
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .end-mark img { width: 36px; }
+
+    .faqs {
+      padding: 96px 28px;
+      background: var(--paper);
+    }
+
+    .faq-wrap {
+      width: min(980px, 100%);
+      margin: 0 auto;
+    }
+
+    .faq-wrap h2 {
+      text-align: center;
+      color: var(--terracotta);
+      margin-bottom: 48px;
+      font-weight: 400;
+      letter-spacing: 6px;
+    }
+
+    .faq-list {
+      list-style: none;
+      display: grid;
+      gap: 44px;
+    }
+
+    .faq-item {
+      display: grid;
+      grid-template-columns: minmax(80px, 120px) 1fr;
+      column-gap: 30px;
+      align-items: center;
+    }
+
+    .faq-number {
+      font-family: 'Angella White Personal Use Only', cursive;
+      font-size: clamp(5.7rem, 4.4vw, 5rem);
+      color: #7a7a66;
+      line-height: 1;
+      text-transform: lowercase;
+      text-align: center;
+      justify-self: center;
+      width: 100%;
+    }
+
+    .faq-item h3 {
+      font-size: clamp(1.1rem, 1.6vw, 1.6rem);
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 6px;
+      color: var(--terracotta);
+      letter-spacing: 0.4px;
+    }
+
+    .faq-item p {
+      font-family: var(--sans-font);
+      color: #9a9a93;
+      font-size: clamp(0.95rem, 1.25vw, 1.2rem);
+      line-height: 1.35;
+    }
+
+    .faqs a {
+      color: #7b7a6a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contacto {
+      padding-top: 82px;
+      background: var(--paper);
+    }
+
+    .stripe-zone {
+      background: var(--paper) url('img/contacto/fondo líneas.png') center top / cover no-repeat;
+      padding: 32px 0;
+    }
+
+    .card {
+      width: min(1200px, calc(100% - 28px));
+      margin: 0 auto;
+      background: var(--terracotta);
+      color: var(--light);
+      padding: clamp(28px, 5vw, 70px);
+    }
+
+    .card h2 {
+      color: var(--light);
+      text-align: left;
+      margin: 0 0 20px;
+    }
+
+    .card p {
+      font-family: var(--sans-font);
+      font-size: clamp(1.1rem, 1.7vw, 1.9rem);
+      line-height: 1.2;
+      max-width: 850px;
+    }
+
+    .planner {
+      margin: 24px 0;
+      display: inline-grid;
+      gap: 6px;
+    }
+
+    .planner img { width: 48px; }
+
+    .planner span,
+    .planner strong {
+      display: block;
+      text-transform: uppercase;
+    }
+
+    .planner span { font-size: clamp(1.2rem, 1.8vw, 2rem); }
+    .planner strong { font-size: clamp(1.6rem, 2.6vw, 3rem); }
+
+    .landscape {
+      position: relative;
+      line-height: 0;
+    }
+
+    .landscape > img:first-child {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .mono {
+      position: absolute;
+      top: clamp(18px, 4vw, 58px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(34px, 4vw, 80px);
+      filter: brightness(0) saturate(100%) invert(32%) sepia(17%) saturate(1088%) hue-rotate(334deg) brightness(95%) contrast(88%);
+    }
+
+    .contacto-final {
+      position: relative;
+      line-height: 0;
+    }
+
+    .contacto-final img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .contacto-final .contacto-logo {
+      position: absolute;
+      top: clamp(140px, 4vw, 58px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(36px, 4.2vw, 90px);
+      filter: brightness(0) saturate(100%) invert(32%) sepia(17%) saturate(1088%) hue-rotate(334deg) brightness(95%) contrast(88%);
+    }
+
+    @media (max-width: 960px) {
+      .dress-row,
+      .rsvp-card {
+        grid-template-columns: 1fr;
+      }
+
+      .dress-row {
+        text-align: center;
+        justify-items: center;
+      }
+
+      .dress-row img {
+        justify-self: center;
+      }
+
+      .dress-copy {
+        text-align: center;
+      }
+
+      .deadline {
+        align-self: start;
+        justify-self: start;
+      }
+
+      .details-grid {
+        display: block;
+      }
+
+      .detail-card {
+        grid-column: auto;
+        margin-bottom: 22px;
+      }
+
+      nav a {
+        font-size: 0.82rem;
+        padding: 4px 7px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      header {
+        justify-content: space-between;
+        padding: 12px 14px;
+      }
+
+      .logo {
+        position: static;
+      }
+
+      .logo img { height: 34px; }
+
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      nav {
+        position: absolute;
+        top: calc(100% + 4px);
+        right: 12px;
+        background: var(--paper);
+        border: none;
+        box-shadow: none;
+        padding: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        display: none;
+      }
+
+      nav.is-open { display: flex; }
+
+      nav a {
+        font-size: 1.1rem;
+        padding: 4px 2px;
+      }
+
+      nav a:not(:last-child) { border-right: none; }
+
+      .hero {
+        margin-top: 0;
+      }
+
+      .hero img {
+        min-height: 540px;
+      }
+
+      .home-box {
+        top: 30%;
+      }
+
+      .details-grid {
+        display: block;
+      }
+
+      .detail-card {
+        grid-column: auto;
+        margin-bottom: 70px;
+      }
+
+      .faq-item {
+        grid-template-columns: 64px 1fr;
+        column-gap: 10px;
+        row-gap: 0;
+        align-items: start;
+      }
+
+      .faq-number {
+        text-align: center;
+        justify-self: center;
+        width: 100%;
+        font-size: clamp(3rem, 7.4vw, 3.35rem);
+        line-height: 1;
+        padding-top: 2px;
+      }
+
+      .faq-item > div {
+        grid-column: 2;
+      }
+
+      .faqs {
+        padding-left: 36px;
+        padding-right: 36px;
+      }
+
+      .contacto-final .contacto-logo {
+        top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="#home">
+      <img src="img/logo header.png" alt="Juanita y Nicolas" />
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+    <nav id="main-nav">
+      <a href="#home">Home</a>
+      <a href="#detalles">Detalles</a>
+      <a href="#dresscode">Dress Code</a>
+      <a href="#rsvp">RSVP</a>
+      <a href="#comollegar">¿Cómo llegar?</a>
+      <a href="#galeria">Galería</a>
+      <a href="#faqs">FAQs</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <img src="img/landingdetalles/mockup.jpeg" alt="Ilustracion paisaje" />
+    <div class="home-box">
+      <h1>Juanita & Nicolás</h1>
+      <p>03 . 10 . 26</p>
+    </div>
+  </section>
+
+  <section id="detalles" class="details">
+    <h2>Detalles del evento</h2>
+    <div class="details-grid">
+      <article class="detail-card">
+        <img class="detail-icon" src="img/landingdetalles/calendario.png" alt="Icono calendario" />
+        <span class="detail-label">Fecha</span>
+        <span class="detail-value">03.10.26</span>
+      </article>
+      <article class="detail-card">
+        <img class="detail-icon" src="img/landingdetalles/anillos.png" alt="Icono anillos" />
+        <span class="detail-label">Lugar</span>
+        <span class="detail-value">Club Hatogrande</span>
+      </article>
+      <article class="detail-card">
+        <img class="detail-icon" src="img/landingdetalles/reloj.png" alt="Icono reloj" />
+        <span class="detail-label">Hora</span>
+        <span class="detail-value">4PM a 2AM</span>
+      </article>
+      <article class="detail-card">
+        <img class="detail-icon" src="img/landingdetalles/copas.png" alt="Icono copas" />
+        <span class="detail-label">Ceremonia y cóctel</span>
+        <span class="detail-value">Terraza salón principal del club</span>
+      </article>
+      <article class="detail-card">
+        <img class="detail-icon" src="img/landingdetalles/zapato.png" alt="Icono zapato" />
+        <span class="detail-label">Recepción</span>
+        <span class="detail-value">Salón principal club Hatogrande</span>
+      </article>
+    </div>
+  </section>
+
+  <section id="dresscode" class="dresscode">
+    <div class="dress-title"><h2>Dress Code</h2></div>
+    <div class="dress-content">
+      <article class="dress-row">
+        <img src="img/dresscode/vestidos m.png" alt="Referencia de vestidos para mujeres" />
+        <div class="dress-copy">
+          <h3>Mujeres</h3>
+          <span class="script">vestido largo</span>
+          <p><strong>Colores reservados:</strong> blanco y similares para la novia, verde oliva y terracota. No estampados.</p>
+        </div>
+      </article>
+      <article class="dress-row">
+        <div class="dress-copy">
+          <h3>Hombres</h3>
+          <span class="script">traje y corbata</span>
+          <p><strong>Elementos reservados:</strong> chalecos y tirantes reservados para el novio.</p>
+        </div>
+        <img src="img/dresscode/vestidos h.png" alt="Referencia de trajes para hombres" />
+      </article>
+      <div class="dress-tip" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section id="rsvp" class="rsvp">
+    <article class="rsvp-card">
+      <div>
+        <h2>RSVP</h2>
+        <p>Estaremos felices de que nos acompañes, confirma tu asistencia aquí:</p>
+        <a class="confirm-btn" href="https://forms.gle/ptZTTwe1xuUWFRsC8" target="_blank" rel="noopener noreferrer">Confirmo</a>
+      </div>
+      <div class="deadline">
+        <img src="img/rvsp/idea.png" alt="Icono idea" />
+        <span>Fecha límite de confirmación</span>
+        <strong>30 de junio de 2026</strong>
+      </div>
+    </article>
+  </section>
+
+  <section id="comollegar" class="comollegar">
+    <h2>¿Cómo llegar?</h2>
+    <picture>
+      <source media="(min-width: 961px)" srcset="img/comollegar/MAPA.png" />
+      <img src="img/comollegar/mapa 02.png" alt="Mapa de llegada al Club Hatogrande" />
+    </picture>
+  </section>
+
+  <section id="galeria" class="galeria">
+    <div class="gallery-hero">
+      <img src="img/galeria/fotos.png" alt="Collage en blanco y negro de Juanita y Nicolas" />
+      <h2>Galería</h2>
+    </div>
+    <div class="invite">
+      <p>Queremos ver el matrimonio desde tus ojos.</p>
+      <p>Te dejamos este link para que subas fotos, videos y cualquier momento que quieras compartir con nosotros.</p>
+      <a class="share-btn" href="https://drive.google.com/drive/folders/1MQOF2mEONriJP8hhGWrjSt0t6dOD-SgM?usp=sharing" target="_blank" rel="noopener noreferrer">Compartir</a>
+    </div>
+    <div class="end-mark">
+      <img src="img/galeria/logo  mid.png" alt="Logo JN" />
+    </div>
+  </section>
+
+  <section id="faqs" class="faqs">
+    <div class="faq-wrap">
+      <h2>FAQs</h2>
+      <ol class="faq-list">
+        <li class="faq-item">
+          <span class="faq-number">uno.</span>
+          <div>
+            <h3>¿Cuál es el código de vestuario?</h3>
+            <p>Queremos que te sientas cómodo y elegante para celebrar. El dress code es traje y corbata para los hombres y vestido largo para las mujeres con algunos detalles a tener en cuenta que puedes encontrar en la sección <a href="#dresscode">Dress Code</a> de nuestro website.</p>
+          </div>
+        </li>
+        <li class="faq-item">
+          <span class="faq-number">dos.</span>
+          <div>
+            <h3>¿La boda es al aire libre?</h3>
+            <p>Habrá una parte del evento en una zona exterior cubierta, el resto de la celebración es en un espacio interior.</p>
+          </div>
+        </li>
+        <li class="faq-item">
+          <span class="faq-number">tres.</span>
+          <div>
+            <h3>¿Qué tipo de regalos prefieren?</h3>
+            <p>¡Gracias por pensar en nosotros! Para nuestro matrimonio elegimos lluvia de sobres.</p>
+          </div>
+        </li>
+        <li class="faq-item">
+          <span class="faq-number">cuatro.</span>
+          <div>
+            <h3>¿Es una boda para niños / kid friendly?</h3>
+            <p>Amamos a los más pequeños pero esta celebración será solo para adultos.</p>
+          </div>
+        </li>
+        <li class="faq-item">
+          <span class="faq-number">cinco.</span>
+          <div>
+            <h3>¿Puedo informar restricciones alimentarias?</h3>
+            <p>Tendrás la oportunidad de contarnos tus restricciones alimentarias y preferencias en un <a href="#rsvp">Formulario</a> que te estaremos compartiendo.</p>
+          </div>
+        </li>
+        <li class="faq-item">
+          <span class="faq-number">seis.</span>
+          <div>
+            <h3>¿Habrá hora de cierre?</h3>
+            <p>¡Prepárate para darlo todo! En la invitación formal y en el <a href="#home">Landing Page</a> de este website encuentras más detalles sobre el horario.</p>
+          </div>
+        </li>
+        <li class="faq-item">
+          <span class="faq-number">siete.</span>
+          <div>
+            <h3>¿Cómo puedo confirmar asistencia o hacer cambios?</h3>
+            <p>Toda la información de confirmación y actualizaciones estará disponible en <a href="#rsvp">esta página</a>. Por favor ten presente las fechas límites para confirmar.</p>
+          </div>
+        </li>
+        <li class="faq-item">
+          <span class="faq-number">ocho.</span>
+          <div>
+            <h3>¿Habrá parqueadero?</h3>
+            <p>Sí, el lugar cuenta con parqueadero. Revisa la sección de <a href="#comollegar">¿Cómo llegar?</a> para más información.</p>
+          </div>
+        </li>
+        <li class="faq-item">
+          <span class="faq-number">Nueve.</span>
+          <div>
+            <h3>¿Puedo llevar un acompañante si no está en la invitación?</h3>
+            <p>No, la invitación es personal. Gracias por entender y ayudarnos a que todo fluya.</p>
+          </div>
+        </li>
+        <li class="faq-item">
+          <span class="faq-number">Diez.</span>
+          <div>
+            <h3>¿Habrá hashtag del matrimonio?</h3>
+            <p>Sí: #MejiaHurtado, úsalo y etiquétanos.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contacto" class="rsvp">
+    <article class="rsvp-card">
+      <div>
+        <h2>Contacto</h2>
+        <p>Nuestra Wedding Planner sera la persona indicada para ayudarte con cualquier tema relacionado con el matrimonio.</p>
+        <img src="img/contacto/anillos.png" alt="Icono anillos" class="contacto-icon" />
+        <p class="planner-name">PAOLA FLOREZ</p>
+        <p class="planner-phone">(310) 801-8516</p>
+        <p>Para asuntos mas personales o privados, no dudes en contactarnos directamente.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="contacto-final">
+    <img class="contacto-logo" src="img/galeria/logo  mid.png" alt="Logo JN" />
+    <img src="img/contacto/final.png" alt="Imagen final de contacto" />
+  </section>
+
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#main-nav');
+
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      nav.addEventListener('click', (event) => {
+        if (event.target.tagName === 'A') {
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
